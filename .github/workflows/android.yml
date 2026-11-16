@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Extract Android project
+        run: unzip -o AeroPods-GitHub-Upload.zip -d .
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -15,9 +17,11 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
-      - run: gradle --no-daemon :app:assembleDebug
+      - name: Build debug APK
+        run: gradle --no-daemon :app:assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: AeroPod-debug-apk
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+          retention-days: 14
