@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Extract Android project
-        run: unzip -o AeroPods-GitHub-Upload.zip -d .
+        run: unzip -o AeroPodAndroid-GitHub-Actions.zip -d .
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
